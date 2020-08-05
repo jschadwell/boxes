@@ -1,7 +1,7 @@
 CXX=g++
 RM=rm -f
 
-SRCS=main.cpp box.cpp
+SRCS=nest.cpp box.cpp
 OBJS=$(subst .cpp,.o,$(SRCS))
 
 all: nest

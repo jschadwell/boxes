@@ -1,14 +1,20 @@
-nest: main.o box.o
-	g++ -o nest main.o box.o
+CXX=g++
+RM=rm -f
+
+SRCS=main.cpp box.cpp
+OBJS=$(subst .cpp,.o,$(SRCS))
+
+all: nest
+
+nest: $(OBJS)
+	$(CXX) -o nest $(OBJS)
 
 main.o : main.cpp box.h
-	g++ -c main.cpp
 
 box.o : box.cpp box.h
-	g++ -c box.cpp
 
 clean :
-	rm main.o box.o
+	$(RM) $(OBJS)
 
 distclean : clean
-	rm nest
+	$(RM) nest

@@ -5,15 +5,15 @@
 
 class Box {
 public:
-	Box();
-	~Box();
+    Box();
+    ~Box();
 
-//	void addChild(Box* child);
-//	int numChildren();
-	void print();
+//    void addChild(Box* child);
+//    int numChildren();
+    void print();
 
 private:
-	std::vector<std::unique_ptr<Box> > _children;
+    std::vector<std::unique_ptr<Box> > _children;
 };
 
 #endif // BOX_H

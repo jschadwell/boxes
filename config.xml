@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<boxes>
+  <box id="box1">
+    <contains>box2</contains>
+    <contains>box5</contains>
+  </box>
+  <box id="box2">
+    <contains>box3</contains>
+    <contains>box4</contains>
+  </box>
+  <box id="box3"/>
+  <box id="box4"/>
+  <box id="box5"/>
+</boxes>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ERROR: box contains non-existent child -->
+<boxes>
+  <box id="box1">
+    <contains>box2</contains>
+    <contains>box3</contains>
+  </box>
+  <box id="box2"/>
+</boxes>

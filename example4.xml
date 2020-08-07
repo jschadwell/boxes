@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<boxes>
+  <box id="box1">
+    <contains>box2</contains>
+    <contains>box3</contains>
+    <contains>box4</contains>
+  </box>
+  <box id="box2">
+    <contains>box5</contains>
+    <contains>box6</contains>
+    <contains>box7</contains>
+  </box>
+  <box id="box3">
+    <contains>box8</contains>
+    <contains>box9</contains>
+    <contains>box10</contains>
+  </box>
+  <box id="box4">
+    <contains>box11</contains>
+    <contains>box12</contains>
+    <contains>box13</contains>
+  </box>
+  <box id="box5"/>
+  <box id="box6"/>
+  <box id="box7"/>
+  <box id="box8"/>
+  <box id="box9"/>
+  <box id="box10"/>
+  <box id="box11"/>
+  <box id="box12"/>
+  <box id="box13"/>
+</boxes>

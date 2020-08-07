@@ -7,7 +7,7 @@ CXXFLAGS=-std=c++14
 LDFLAGS=-lboost_filesystem -L/usr/local/boost_1_73_0/stage/lib -Wl,-rpath,/usr/local/boost_1_73_0/stage/lib
 #LDLIBS=$(shell root-config --libs)
 
-SRCS=nest.cpp box.cpp
+SRCS=nest.cpp Box.cpp
 OBJS=$(subst .cpp,.o,$(SRCS))
 
 all: nest
@@ -15,9 +15,9 @@ all: nest
 nest: $(OBJS)
 	$(CXX) $(LDFLAGS) -o nest $(OBJS)
 
-main.o : main.cpp box.h
+main.o : main.cpp Box.h
 
-box.o : box.cpp box.h
+Box.o : Box.cpp Box.h
 
 clean :
 	$(RM) $(OBJS)

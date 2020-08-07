@@ -1,4 +1,4 @@
-#include "box.h"
+#include "Box.h"
 #include <iostream>
 #include <string>
 #include <boost/filesystem.hpp>

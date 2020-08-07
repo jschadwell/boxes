@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- ERROR: box has multiple parents -->
-<boxes>
+<nestconfig>
   <box id="box1">
     <contains>box2</contains>
     <contains>box3</contains>
@@ -11,4 +11,4 @@
   <box id="box3">
     <contains>box4</contains>
   <box id="box4"/>
-</boxes>
+</nestconfig>

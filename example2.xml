@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<boxes>
+<nestconfig>
   <box id="box1">
     <contains>box2</contains>
     <contains>box3</contains>
@@ -27,4 +27,4 @@
   <box id="box10"/>
   <box id="box11"/>
   <box id="box12"/>
-</boxes>
+</nestconfig>

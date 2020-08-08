@@ -2,9 +2,6 @@
 #include "Box.h"
 #include <iostream>
 #include <string>
-#include <boost/filesystem.hpp>
-
-namespace filesys = boost::filesystem;
 
 int main(int argc, char* argv[]) {
     // Check the command line arguments
@@ -21,23 +18,9 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // try {
-    //     // Check to make sure the input file exists
-    //     filesys::path filepath(configFile);
-    //     if (!filesys::exists(filepath)) {
-    //         std::cerr << argv[0] << ": " << configFile << ": No such file" << std::endl;
-    //         return 1;
-    //     }
-    //     // Check to make sure the input file is the correct type
-    //     if (!filesys::is_regular_file(configFile)) {
-    //         std::cerr << argv[0] << ": " << argv[1] << ": Invalid file type" << std::endl;
-    //         return 1;
-    //     }
-    // } catch (filesys::filesystem_error& e) {
-    //     // Something bad happened
-    //     std::cerr << e.what() << std::endl;
-    //     return 1;
-    // }
+    if (!builder.buildNestedBox()) {
+        return 1;
+    }
 
     std::cout << "Input file: " << argv[1] << std::endl;
 

@@ -3,6 +3,7 @@
 
 #include "Box.h"
 #include <boost/property_tree/ptree.hpp>
+#include <exception>
 #include <string>
 
 namespace pt = boost::property_tree;
@@ -17,6 +18,8 @@ public:
     Box* getNestedBox();
 
 private:
+    void errorMsg(const std::exception& e);
+
     pt::ptree _tree;
 };
 

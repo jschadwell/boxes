@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <nestconfig>
-  <box id="box1">
-    <contains>box2</contains>
-    <contains>box5</contains>
-  </box>
+  <box id="box1"/>
   <box id="box2">
-    <contains>box3</contains>
-    <contains>box4</contains>
+    <parent>box1</parent>
   </box>
-  <box id="box3"/>
-  <box id="box4"/>
-  <box id="box5"/>
+  <box id="box3">
+    <parent>box2</parent>
+  </box>
+  <box id="box4">
+    <parent>box2</parent>
+  </box>
+  <box id="box5">
+    <parent>box1</parent>
+  </box>
 </nestconfig>

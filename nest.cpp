@@ -1,4 +1,4 @@
-#include "NestedBoxBuilder.h"
+#include "BoxRepository.h"
 #include "Box.h"
 #include <iostream>
 #include <string>
@@ -13,18 +13,11 @@ int main(int argc, char* argv[]) {
 
     std::string configFile(argv[1]);
 
-    NestedBoxBuilder builder;
-    if (!builder.load(configFile)) {
+    BoxRepository boxRepository;
+
+    if (!boxRepository.init(configFile)) {
         return 1;
     }
 
-    if (!builder.buildNestedBox()) {
-        return 1;
-    }
-
-    std::cout << "Input file: " << argv[1] << std::endl;
-
-    Box box;
-
-    box.print();
+    return 0;
 }

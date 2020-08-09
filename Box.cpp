@@ -1,7 +1,7 @@
 #include "Box.h"
 #include <iostream>
 
-Box::Box() {}
+Box::Box(std::string id) : _id(id) {}
 
 Box::~Box() {}
 
@@ -15,5 +15,5 @@ Box::~Box() {}
 //}
 
 void Box::print() {
-    std::cout << "print" << std::endl;
+    std::cout << "Box ID = " << _id << std::endl;
 }

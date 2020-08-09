@@ -2,10 +2,11 @@
 #define BOX_H
 
 #include <vector>
+#include <string>
 
 class Box {
 public:
-    Box();
+    Box(std::string id);
     ~Box();
 
 //    void addChild(Box* child);
@@ -13,7 +14,8 @@ public:
     void print();
 
 private:
-    std::vector<std::unique_ptr<Box> > _children;
+	std::string _id;
+    //std::vector<Box*> _children;
 };
 
 #endif // BOX_H

@@ -15,6 +15,10 @@ bool BoxRepository::init(std::string& xmlFile) {
         return false;
     }
 
+    if (!validateConfig()) {
+        return false;
+    }
+
     for (auto&& item : _boxMap) {
         item.second->print();
     }
@@ -74,6 +78,23 @@ bool BoxRepository::readConfig() {
     } catch (const std::exception& e) {
         errorMsg(e.what());
         return false;
+    }
+
+    return true;
+}
+
+bool BoxRepository::validateConfig() {
+    // Make sure all children actually exist
+    for (auto iter = begin(_boxMap); iter != end(_boxMap); iter++) {
+        std::cout << "Key = " << iter->first << std::endl;
+        for (auto&& child : iter->second->getChildren()) {
+            std::cout << "Child = " << child << ", " << _boxMap.count(child) << std::endl;
+            if (_boxMap.count(child) == 0) {
+                std::string msg = "Invalid child (" + child + ") found in box (" + iter->first + ")";
+                errorMsg(msg.data());
+                return false;
+            }
+        }
     }
 
     return true;

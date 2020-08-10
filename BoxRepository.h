@@ -20,6 +20,7 @@ public:
 private:
     bool loadConfigFile(std::string& xmlFile);
     bool readConfig();
+    bool validateConfig();
     void errorMsg(const char* msg);
 
     pt::ptree _tree;

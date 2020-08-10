@@ -12,6 +12,10 @@ bool Box::addChild(std::string id) {
 	return status.second;
 }
 
+const ChildSet& Box::getChildren() const {
+	return _children;
+}
+
 void Box::print() {
     std::cout << "Box ID = " << _id << std::endl;
     for (auto&& child : _children) {

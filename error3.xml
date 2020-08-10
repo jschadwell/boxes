@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- ERROR: box has non-existent parent -->
+<!-- ERROR: box has non-existent child -->
 <nestconfig>
   <box id="box1"/>
-  <box id="box2">
-  	<parent>box3</parent>
+  	<child>box2</child>
   </box>
 </nestconfig>

@@ -1,5 +1,5 @@
 #include "BoxConfigurator.h"
-#include "Box.h"
+#include "BoxConfiguration.h"
 #include <iostream>
 #include <string>
 

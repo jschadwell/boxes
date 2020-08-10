@@ -1,9 +1,9 @@
-#include "Box.h"
+#include "BoxConfiguration.h"
 #include <iostream>
 
-Box::Box(std::string id) : _id(id) {}
+BoxConfiguration::BoxConfiguration(std::string id) : _id(id) {}
 
-bool Box::addChild(std::string id) {
+bool BoxConfiguration::addChild(std::string id) {
 	if (_id.empty()) {
 		return false;
 	}
@@ -12,11 +12,11 @@ bool Box::addChild(std::string id) {
 	return status.second;
 }
 
-const ChildSet& Box::getChildren() const {
+const ChildSet& BoxConfiguration::getChildren() const {
 	return _children;
 }
 
-void Box::print() {
+void BoxConfiguration::print() {
     std::cout << "Box ID = " << _id << std::endl;
     for (auto&& child : _children) {
     	std::cout << "    Child = " << child << std::endl;

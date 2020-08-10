@@ -1,7 +1,7 @@
 #ifndef BOX_CONFIGURATOR_H
 #define BOX_CONFIGURATOR_H
 
-#include "Box.h"
+#include "BoxConfiguration.h"
 #include <boost/property_tree/xml_parser.hpp>
 #include <string>
 #include <map>
@@ -24,7 +24,7 @@ private:
     void errorMsg(const char* msg);
 
     pt::ptree _tree;
-    std::map<std::string, std::unique_ptr<Box> > _boxMap;
+    std::map<std::string, std::unique_ptr<BoxConfiguration> > _boxMap;
 };
 
 #endif // BOX_CONFIGURATOR_H

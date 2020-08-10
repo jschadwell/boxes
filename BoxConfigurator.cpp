@@ -60,7 +60,7 @@ bool BoxConfigurator::parseConfig() {
                     if (boxId == "") {
                         throw pt::ptree_error("Box element with empty ID encountered");
                     }
-                    auto status = _boxMap.insert(std::make_pair(boxId, std::make_unique<Box>(boxId)));
+                    auto status = _boxMap.insert(std::make_pair(boxId, std::make_unique<BoxConfiguration>(boxId)));
                     if (!status.second) {
                         // Duplicate element found
                         throw pt::ptree_error("Duplicate box (" + boxId + ") found");

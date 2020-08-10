@@ -1,15 +1,15 @@
-#ifndef BOX_H
-#define BOX_H
+#ifndef BOX_CONFIGURATION_H
+#define BOX_CONFIGURATION_H
 
 #include <set>
 #include <string>
 
 using ChildSet = std::set<std::string>;
 
-class Box {
+class BoxConfiguration {
 public:
-    Box(std::string id);
-    ~Box() = default;
+    BoxConfiguration(std::string id);
+    ~BoxConfiguration() = default;
 
     bool addChild(std::string id);
     const ChildSet& getChildren() const;
@@ -20,4 +20,4 @@ private:
 	ChildSet _children;
 };
 
-#endif // BOX_H
+#endif // BOX_CONFIGURATION_H

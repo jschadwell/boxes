@@ -11,10 +11,9 @@ bool BoxRepository::init(std::string& xmlFile) {
         return false;
     }
 
-    if (!validateConfig()) {
+    if (!readConfig()) {
         return false;
     }
-
 
     for (auto&& item : _boxMap) {
         item.second->print();
@@ -28,40 +27,58 @@ bool BoxRepository::loadConfigFile(std::string& xmlFile) {
     try {
         pt::read_xml(xmlFile, _tree);
     } catch (const pt::xml_parser::xml_parser_error& e) {
-        errorMsg(e);
+        errorMsg(e.what());
         return false;
     }
 
     return true;
 }
 
-bool BoxRepository::validateConfig() {
+bool BoxRepository::readConfig() {
+    const char ROOT_TAG[] = "nestconfig";
+    const char BOX_TAG[] = "box";
+    const char CHILD_TAG[] = "child";
+    const char ATTR_PREFIX[] = "<xmlattr>";
+    const char ID_ATTR[] = "id";
+    const char EMPTY_TAG[] = "";
     try {
-        for (const pt::ptree::value_type& v : _tree.get_child("nestconfig")) {
-            if (v.first == "box") {
-                std::string id = v.second.get<std::string>("<xmlattr>.id");
-                if (id == "") {
-                    throw pt::ptree_error("Box element with empty ID encountered");
-                }
+        // Extract all of the data from the XML config file
+        for (const pt::ptree::value_type& node : _tree.get_child(ROOT_TAG)) {
+            if (node.first != BOX_TAG) {
+                throw pt::ptree_error("Invalid xml element (" + node.first + ") found");                
+            }
 
-                auto status = _boxMap.insert(std::make_pair(id, std::make_unique<Box>(id)));
-                
-                if (!status.second) {
-                    // Duplicate element found
-                    throw pt::ptree_error("Duplicate xml element (" + id + ") found");
+            pt::ptree subTree = node.second;
+            std::string boxId;
+            for (const pt::ptree::value_type& childNode : subTree.get_child(EMPTY_TAG)) {
+                if (childNode.first == ATTR_PREFIX) {
+                    boxId = childNode.second.get<std::string>(ID_ATTR);
+                    if (boxId == "") {
+                        throw pt::ptree_error("Box element with empty ID encountered");
+                    }
+                    auto status = _boxMap.insert(std::make_pair(boxId, std::make_unique<Box>(boxId)));
+                    if (!status.second) {
+                        // Duplicate element found
+                        throw pt::ptree_error("Duplicate box (" + boxId + ") found");
+                    }
+                } else if (childNode.first == CHILD_TAG) {
+                    std::string childId = childNode.second.get<std::string>(EMPTY_TAG);
+                    if (!_boxMap.at(boxId)->addChild(childId)) {
+                        throw pt::ptree_error("Invalid child (" + childId + ") in box (" + boxId + ") found");
+                    }
+                } else {
+                    throw pt::ptree_error("Invalid xml element (" + childNode.first + ") found");
                 }
-            } else {
-                throw pt::ptree_error("Invalid xml element (" + v.first + ") found");
             }
         }
     } catch (const std::exception& e) {
-        errorMsg(e);
+        errorMsg(e.what());
         return false;
     }
 
     return true;
 }
 
-void BoxRepository::errorMsg(const std::exception& e) {
-    std::cerr << "Error: " << e.what() << std::endl;
+void BoxRepository::errorMsg(const char* msg) {
+    std::cerr << "Error: " << msg << std::endl;
 }

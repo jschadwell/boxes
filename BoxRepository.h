@@ -19,8 +19,8 @@ public:
 
 private:
     bool loadConfigFile(std::string& xmlFile);
-    bool validateConfig();
-    void errorMsg(const std::exception& e);
+    bool readConfig();
+    void errorMsg(const char* msg);
 
     pt::ptree _tree;
     std::map<std::string, std::unique_ptr<Box> > _boxMap;

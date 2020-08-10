@@ -1,5 +1,5 @@
-#ifndef BOX_REPOSITORY_H
-#define BOX_REPOSITORY_H
+#ifndef BOX_CONFIGURATION_H
+#define BOX_CONFIGURATION_H
 
 #include "Box.h"
 #include <boost/property_tree/xml_parser.hpp>
@@ -10,10 +10,10 @@
 namespace pt = boost::property_tree;
 
 
-class BoxRepository {
+class BoxConfiguration {
 public:
-    BoxRepository();
-    ~BoxRepository();
+    BoxConfiguration();
+    ~BoxConfiguration();
 
     bool init(std::string& xmlFile);
 
@@ -27,4 +27,4 @@ private:
     std::map<std::string, std::unique_ptr<Box> > _boxMap;
 };
 
-#endif // BOX_REPOSITORY_H
+#endif // BOX_CONFIGURATION_H

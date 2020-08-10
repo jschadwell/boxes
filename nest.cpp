@@ -1,4 +1,4 @@
-#include "BoxRepository.h"
+#include "BoxConfiguration.h"
 #include "Box.h"
 #include <iostream>
 #include <string>
@@ -13,9 +13,9 @@ int main(int argc, char* argv[]) {
 
     std::string configFile(argv[1]);
 
-    BoxRepository boxRepository;
+    BoxConfiguration boxConfiguration;
 
-    if (!boxRepository.init(configFile)) {
+    if (!boxConfiguration.init(configFile)) {
         return 1;
     }
 

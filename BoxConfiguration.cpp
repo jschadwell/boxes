@@ -1,12 +1,12 @@
-#include "BoxRepository.h"
+#include "BoxConfiguration.h"
 #include <iostream>
 #include <utility>
 
-BoxRepository::BoxRepository() {}
+BoxConfiguration::BoxConfiguration() {}
 
-BoxRepository::~BoxRepository() {}
+BoxConfiguration::~BoxConfiguration() {}
 
-bool BoxRepository::init(std::string& xmlFile) {
+bool BoxConfiguration::init(std::string& xmlFile) {
     if (!loadConfigFile(xmlFile)) {
         return false;
     }
@@ -26,7 +26,7 @@ bool BoxRepository::init(std::string& xmlFile) {
     return true;
 }
 
-bool BoxRepository::loadConfigFile(std::string& xmlFile) {
+bool BoxConfiguration::loadConfigFile(std::string& xmlFile) {
     // Parse the XML file into a property tree
     try {
         pt::read_xml(xmlFile, _tree);
@@ -38,7 +38,7 @@ bool BoxRepository::loadConfigFile(std::string& xmlFile) {
     return true;
 }
 
-bool BoxRepository::readConfig() {
+bool BoxConfiguration::readConfig() {
     const char ROOT_TAG[] = "nestconfig";
     const char BOX_TAG[] = "box";
     const char CHILD_TAG[] = "child";
@@ -83,7 +83,7 @@ bool BoxRepository::readConfig() {
     return true;
 }
 
-bool BoxRepository::validateConfig() {
+bool BoxConfiguration::validateConfig() {
     // Make sure all children actually exist
     for (auto iter = begin(_boxMap); iter != end(_boxMap); iter++) {
         std::cout << "Key = " << iter->first << std::endl;
@@ -100,6 +100,6 @@ bool BoxRepository::validateConfig() {
     return true;
 }
 
-void BoxRepository::errorMsg(const char* msg) {
+void BoxConfiguration::errorMsg(const char* msg) {
     std::cerr << "Error: " << msg << std::endl;
 }

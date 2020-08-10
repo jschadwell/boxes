@@ -1,17 +1,17 @@
-#include "BoxConfiguration.h"
+#include "BoxConfigurator.h"
 #include <iostream>
 #include <utility>
 
-BoxConfiguration::BoxConfiguration() {}
+BoxConfigurator::BoxConfigurator() {}
 
-BoxConfiguration::~BoxConfiguration() {}
+BoxConfigurator::~BoxConfigurator() {}
 
-bool BoxConfiguration::init(std::string& xmlFile) {
-    if (!loadConfigFile(xmlFile)) {
+bool BoxConfigurator::loadConfig(std::string& xmlFile) {
+    if (!readConfigFile(xmlFile)) {
         return false;
     }
 
-    if (!readConfig()) {
+    if (!parseConfig()) {
         return false;
     }
 
@@ -26,7 +26,7 @@ bool BoxConfiguration::init(std::string& xmlFile) {
     return true;
 }
 
-bool BoxConfiguration::loadConfigFile(std::string& xmlFile) {
+bool BoxConfigurator::readConfigFile(std::string& xmlFile) {
     // Parse the XML file into a property tree
     try {
         pt::read_xml(xmlFile, _tree);
@@ -38,7 +38,7 @@ bool BoxConfiguration::loadConfigFile(std::string& xmlFile) {
     return true;
 }
 
-bool BoxConfiguration::readConfig() {
+bool BoxConfigurator::parseConfig() {
     const char ROOT_TAG[] = "nestconfig";
     const char BOX_TAG[] = "box";
     const char CHILD_TAG[] = "child";
@@ -83,7 +83,7 @@ bool BoxConfiguration::readConfig() {
     return true;
 }
 
-bool BoxConfiguration::validateConfig() {
+bool BoxConfigurator::validateConfig() {
     // Make sure all children actually exist
     for (auto iter = begin(_boxMap); iter != end(_boxMap); iter++) {
         std::cout << "Key = " << iter->first << std::endl;
@@ -100,6 +100,6 @@ bool BoxConfiguration::validateConfig() {
     return true;
 }
 
-void BoxConfiguration::errorMsg(const char* msg) {
+void BoxConfigurator::errorMsg(const char* msg) {
     std::cerr << "Error: " << msg << std::endl;
 }

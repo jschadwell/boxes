@@ -1,7 +1,6 @@
 #include "BoxConfigurator.h"
 #include "BoxConfiguration.h"
 #include "BoxRepository.h"
-#include "BoxAssembler.h"
 #include <iostream>
 #include <string>
 
@@ -39,12 +38,18 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    BoxAssembler boxAssembler;
-    //boxAssembler.assemble(boxConfig);
-
+    // Find top-level box
+    Box* top = nullptr;
     for (auto&& item : boxConfig) {
-        item->print();
+        if (!boxRepository.getBox(item->getId())->getParent()) {
+            top = boxRepository.getBox(item->getId());
+            break;
+        }
     }
+
+    top->print();
+    top->resize();
+    top->print();
 
     return 0;
 }

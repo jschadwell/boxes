@@ -12,7 +12,6 @@ public:
     std::string& getId();
     bool addChild(std::string id);
     const std::vector<std::string>& getChildren() const;
-    void print();
 
 private:
 	std::string _id;

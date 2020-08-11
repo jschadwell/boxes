@@ -25,10 +25,3 @@ bool BoxConfiguration::addChild(std::string id) {
 const std::vector<std::string>& BoxConfiguration::getChildren() const {
 	return _children;
 }
-
-void BoxConfiguration::print() {
-    std::cout << "Box ID = " << _id << std::endl;
-    for (auto&& child : _children) {
-    	std::cout << "    Child = " << child << std::endl;
-    }
-}

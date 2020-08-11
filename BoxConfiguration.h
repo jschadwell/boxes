@@ -1,10 +1,10 @@
 #ifndef BOX_CONFIGURATION_H
 #define BOX_CONFIGURATION_H
 
-#include <set>
+#include <vector>
 #include <string>
 
-using ChildSet = std::set<std::string>;
+using ChildSet = std::vector<std::string>;
 
 class BoxConfiguration {
 public:

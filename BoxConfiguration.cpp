@@ -1,5 +1,6 @@
 #include "BoxConfiguration.h"
 #include <iostream>
+#include <algorithm>
 
 BoxConfiguration::BoxConfiguration(std::string id) : _id(id) {}
 
@@ -12,8 +13,13 @@ bool BoxConfiguration::addChild(std::string id) {
 		return false;
 	}
 
-	auto status = _children.insert(id);
-	return status.second;
+	auto pos = std::find(begin(_children), end(_children), id);
+	if (pos != end(_children)) {
+		return false;
+	}
+
+	_children.push_back(id);
+	return true;
 }
 
 const ChildSet& BoxConfiguration::getChildren() const {

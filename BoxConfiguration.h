@@ -11,6 +11,7 @@ public:
     BoxConfiguration(std::string id);
     ~BoxConfiguration() = default;
 
+    std::string& getId();
     bool addChild(std::string id);
     const ChildSet& getChildren() const;
     void print();

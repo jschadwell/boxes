@@ -3,6 +3,10 @@
 
 BoxConfiguration::BoxConfiguration(std::string id) : _id(id) {}
 
+std::string& BoxConfiguration::getId() {
+	return _id;
+}
+
 bool BoxConfiguration::addChild(std::string id) {
 	if (_id.empty()) {
 		return false;

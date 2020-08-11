@@ -14,8 +14,9 @@ int main(int argc, char* argv[]) {
     std::string configFile(argv[1]);
 
     BoxConfigurator boxConfigurator;
+    BoxConfigList boxConfig;
 
-    if (!boxConfigurator.loadConfig(configFile)) {
+    if (!boxConfigurator.loadConfig(configFile, boxConfig)) {
         return 1;
     }
 

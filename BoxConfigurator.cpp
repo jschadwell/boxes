@@ -1,26 +1,33 @@
 #include "BoxConfigurator.h"
 #include <iostream>
 #include <utility>
+#include <algorithm>
+
+// Compares a box configuration item's ID to a given box ID to check for equality.
+// returns true if the IDs match, false otherwise.
+bool isBoxEqual(std::unique_ptr<BoxConfiguration>& boxConfig, std::string id) {
+    return id == boxConfig->getId();
+}
 
 BoxConfigurator::BoxConfigurator() {}
 
 BoxConfigurator::~BoxConfigurator() {}
 
-bool BoxConfigurator::loadConfig(std::string& xmlFile) {
+bool BoxConfigurator::loadConfig(std::string& xmlFile, BoxConfigList& configList) {
     if (!readConfigFile(xmlFile)) {
         return false;
     }
 
-    if (!parseConfig()) {
+    if (!parseConfig(configList)) {
         return false;
     }
 
-    if (!validateConfig()) {
+    if (!validateConfig(configList)) {
         return false;
     }
 
-    for (auto&& item : _boxMap) {
-        item.second->print();
+    for (auto&& item : configList) {
+        item->print();
     }
 
     return true;
@@ -38,13 +45,14 @@ bool BoxConfigurator::readConfigFile(std::string& xmlFile) {
     return true;
 }
 
-bool BoxConfigurator::parseConfig() {
+bool BoxConfigurator::parseConfig(BoxConfigList& configList) {
     const char ROOT_TAG[] = "nestconfig";
     const char BOX_TAG[] = "box";
     const char CHILD_TAG[] = "child";
     const char ATTR_PREFIX[] = "<xmlattr>";
     const char ID_ATTR[] = "id";
     const char EMPTY_TAG[] = "";
+
     try {
         // Extract all of the data from the XML config file
         for (const pt::ptree::value_type& node : _tree.get_child(ROOT_TAG)) {
@@ -60,14 +68,21 @@ bool BoxConfigurator::parseConfig() {
                     if (boxId == "") {
                         throw pt::ptree_error("Box element with empty ID encountered");
                     }
-                    auto status = _boxMap.insert(std::make_pair(boxId, std::make_unique<BoxConfiguration>(boxId)));
-                    if (!status.second) {
+
+                    // See if the box is already in the list
+                    auto pos = std::find_if(begin(configList), end(configList), std::bind(isBoxEqual, std::placeholders::_1, boxId));
+                    if (pos != end(configList)) {
                         // Duplicate element found
                         throw pt::ptree_error("Duplicate box (" + boxId + ") found");
                     }
+
+                    // Add thew new configuration item to the list
+                    configList.push_back(std::make_unique<BoxConfiguration>(boxId));
+
                 } else if (childNode.first == CHILD_TAG) {
                     std::string childId = childNode.second.get<std::string>(EMPTY_TAG);
-                    if (!_boxMap.at(boxId)->addChild(childId)) {
+                    auto pos = std::find_if(begin(configList), end(configList), std::bind(isBoxEqual, std::placeholders::_1, boxId));
+                    if (!(*pos)->addChild(childId)) {
                         throw pt::ptree_error("Invalid child (" + childId + ") in box (" + boxId + ") found");
                     }
                 } else {
@@ -83,14 +98,13 @@ bool BoxConfigurator::parseConfig() {
     return true;
 }
 
-bool BoxConfigurator::validateConfig() {
+bool BoxConfigurator::validateConfig(BoxConfigList& configList) {
     // Make sure all children actually exist
-    for (auto iter = begin(_boxMap); iter != end(_boxMap); iter++) {
-        std::cout << "Key = " << iter->first << std::endl;
-        for (auto&& child : iter->second->getChildren()) {
-            std::cout << "Child = " << child << ", " << _boxMap.count(child) << std::endl;
-            if (_boxMap.count(child) == 0) {
-                std::string msg = "Invalid child (" + child + ") found in box (" + iter->first + ")";
+    for (auto iter = begin(configList); iter != end(configList); iter++) {
+        std::cout << "Key = " << (*iter)->getId() << std::endl;
+        for (auto&& child : (*iter)->getChildren()) {
+            if (std::count_if(begin(configList), end(configList), std::bind(isBoxEqual, std::placeholders::_1, child)) == 0) {
+                std::string msg = "Invalid child (" + child + ") found in box (" + (*iter)->getId() + ")";
                 errorMsg(msg.data());
                 return false;
             }

@@ -26,10 +26,6 @@ bool BoxConfigurator::loadConfig(std::string& xmlFile, BoxConfigList& configList
         return false;
     }
 
-    for (auto&& item : configList) {
-        item->print();
-    }
-
     return true;
 }
 

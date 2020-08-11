@@ -6,7 +6,7 @@
 
 // Compares a box configuration item's ID to a given box ID to check for equality.
 // returns true if the IDs match, false otherwise.
-bool isBoxEqual(std::unique_ptr<BoxConfiguration>& boxConfig, std::string id) {
+bool isBoxEqual(BoxConfigurationPtr& boxConfig, std::string id) {
     return id == boxConfig->getId();
 }
 
@@ -14,7 +14,7 @@ BoxConfigurator::BoxConfigurator() {}
 
 BoxConfigurator::~BoxConfigurator() {}
 
-bool BoxConfigurator::loadConfig(std::string& xmlFile, BoxConfigList& configList) {
+bool BoxConfigurator::loadConfig(std::string& xmlFile, std::vector<BoxConfigurationPtr>& configList) {
     if (!readConfigFile(xmlFile)) {
         return false;
     }
@@ -42,7 +42,7 @@ bool BoxConfigurator::readConfigFile(std::string& xmlFile) {
     return true;
 }
 
-bool BoxConfigurator::parseConfig(BoxConfigList& configList) {
+bool BoxConfigurator::parseConfig(std::vector<BoxConfigurationPtr>& configList) {
     const char ROOT_TAG[] = "nestconfig";
     const char BOX_TAG[] = "box";
     const char CHILD_TAG[] = "child";
@@ -95,7 +95,7 @@ bool BoxConfigurator::parseConfig(BoxConfigList& configList) {
     return true;
 }
 
-bool BoxConfigurator::validateConfig(BoxConfigList& configList) {
+bool BoxConfigurator::validateConfig(std::vector<BoxConfigurationPtr>& configList) {
     // Get all of the box IDs. We'll use this to determine if there's
     // more than one top box
     std::set<std::string> boxIds;

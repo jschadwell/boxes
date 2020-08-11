@@ -8,19 +8,17 @@
 
 namespace pt = boost::property_tree;
 
-using BoxConfigList = std::vector<std::unique_ptr<BoxConfiguration> >;
-
 class BoxConfigurator {
 public:
     BoxConfigurator();
     ~BoxConfigurator();
 
-    bool loadConfig(std::string& xmlFile, BoxConfigList& configList);
+    bool loadConfig(std::string& xmlFile, std::vector<BoxConfigurationPtr>& configList);
 
 private:
     bool readConfigFile(std::string& xmlFile);
-    bool parseConfig(BoxConfigList& configList);
-    bool validateConfig(BoxConfigList& configList);
+    bool parseConfig(std::vector<BoxConfigurationPtr>& configList);
+    bool validateConfig(std::vector<BoxConfigurationPtr>& configList);
     void errorMsg(const std::string& msg);
     void errorMsg(const char* msg);
 

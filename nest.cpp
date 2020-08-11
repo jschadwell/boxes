@@ -1,5 +1,7 @@
 #include "BoxConfigurator.h"
 #include "BoxConfiguration.h"
+#include "BoxRepository.h"
+#include "BoxAssembler.h"
 #include <iostream>
 #include <string>
 
@@ -13,12 +15,32 @@ int main(int argc, char* argv[]) {
 
     std::string configFile(argv[1]);
 
+    // Get configuration from config file
     BoxConfigurator boxConfigurator;
-    BoxConfigList boxConfig;
-
+    std::vector<BoxConfigurationPtr> boxConfig;
     if (!boxConfigurator.loadConfig(configFile, boxConfig)) {
         return 1;
     }
+
+    // Create boxes
+    BoxRepository boxRepository;
+    for (auto&& item : boxConfig) {
+        boxRepository.addBox(item->getId());
+    }
+
+    // Set up parent/child relationships in boxes
+    for (auto&& item : boxConfig) {
+        auto children = item->getChildren();
+        for (auto childIter = begin(children); childIter != end(children); childIter++) {
+            auto parent = boxRepository.getBox(item->getId());
+            auto child = boxRepository.getBox(*childIter);
+            parent->addChild(child);
+            child->addParent(parent);
+        }
+    }
+
+    BoxAssembler boxAssembler;
+    //boxAssembler.assemble(boxConfig);
 
     for (auto&& item : boxConfig) {
         item->print();

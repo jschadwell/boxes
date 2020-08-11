@@ -22,7 +22,7 @@ bool BoxConfiguration::addChild(std::string id) {
 	return true;
 }
 
-const ChildSet& BoxConfiguration::getChildren() const {
+const std::vector<std::string>& BoxConfiguration::getChildren() const {
 	return _children;
 }
 

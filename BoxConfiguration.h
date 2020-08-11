@@ -4,8 +4,6 @@
 #include <vector>
 #include <string>
 
-using ChildSet = std::vector<std::string>;
-
 class BoxConfiguration {
 public:
     BoxConfiguration(std::string id);
@@ -13,12 +11,14 @@ public:
 
     std::string& getId();
     bool addChild(std::string id);
-    const ChildSet& getChildren() const;
+    const std::vector<std::string>& getChildren() const;
     void print();
 
 private:
 	std::string _id;
-	ChildSet _children;
+	std::vector<std::string> _children;
 };
+
+using BoxConfigurationPtr = std::unique_ptr<BoxConfiguration>;
 
 #endif // BOX_CONFIGURATION_H

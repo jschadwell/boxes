@@ -67,7 +67,7 @@ bool BoxConfigurator::parseConfig(std::vector<BoxConfigurationPtr>& configList) 
                     }
 
                     // See if the box is already in the list
-                    auto pos = std::find_if(begin(configList), end(configList), std::bind(isBoxEqual, std::placeholders::_1, boxId));
+                    auto pos = std::find_if(std::begin(configList), std::end(configList), std::bind(isBoxEqual, std::placeholders::_1, boxId));
                     if (pos != end(configList)) {
                         // Duplicate element found
                         throw pt::ptree_error("Duplicate box (" + boxId + ") found");
@@ -78,7 +78,7 @@ bool BoxConfigurator::parseConfig(std::vector<BoxConfigurationPtr>& configList) 
 
                 } else if (childNode.first == CHILD_TAG) {
                     std::string childId = childNode.second.get<std::string>(EMPTY_TAG);
-                    auto pos = std::find_if(begin(configList), end(configList), std::bind(isBoxEqual, std::placeholders::_1, boxId));
+                    auto pos = std::find_if(configList.begin(), configList.end(), std::bind(isBoxEqual, std::placeholders::_1, boxId));
                     if (!(*pos)->addChild(childId)) {
                         throw pt::ptree_error("Invalid child (" + childId + ") in box (" + boxId + ") found");
                     }
@@ -104,16 +104,15 @@ bool BoxConfigurator::validateConfig(std::vector<BoxConfigurationPtr>& configLis
     }
 
     // Make sure all children actually exist
-    for (auto iter = begin(configList); iter != end(configList); iter++) {
-        std::cout << "Key = " << (*iter)->getId() << std::endl;
-        for (auto&& child : (*iter)->getChildren()) {
-            if (std::count_if(begin(configList), end(configList), std::bind(isBoxEqual, std::placeholders::_1, child)) == 0) {
-                errorMsg("Invalid child (" + child + ") found in box (" + (*iter)->getId() + ")");
+    for (auto&& item : configList) {
+        for (auto childIter = item->begin(); childIter != item->end(); ++childIter) {
+            if (std::count_if(configList.begin(), configList.end(), std::bind(isBoxEqual, std::placeholders::_1, *childIter)) == 0) {
+                errorMsg("Invalid child (" + *childIter + ") found in box (" + (*item).getId() + ")");
                 return false;
             }
 
             // Remove the child from the set of box IDs
-            boxIds.erase(child);
+            boxIds.erase(*childIter);
         }
     }
 

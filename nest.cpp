@@ -29,8 +29,7 @@ int main(int argc, char* argv[]) {
 
     // Set up parent/child relationships in boxes
     for (auto&& item : boxConfig) {
-        auto children = item->getChildren();
-        for (auto childIter = begin(children); childIter != end(children); childIter++) {
+        for (auto childIter = (*item).begin(); childIter != (*item).end(); childIter++) {
             auto parent = boxRepository.getBox(item->getId());
             auto child = boxRepository.getBox(*childIter);
             parent->addChild(child);

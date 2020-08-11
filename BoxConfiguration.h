@@ -4,6 +4,8 @@
 #include <vector>
 #include <string>
 
+using BoxConfigurationIterator = std::vector<std::string>::iterator;
+
 class BoxConfiguration {
 public:
     BoxConfiguration(std::string id);
@@ -11,7 +13,8 @@ public:
 
     std::string& getId();
     bool addChild(std::string id);
-    const std::vector<std::string>& getChildren() const;
+    BoxConfigurationIterator begin();
+    BoxConfigurationIterator end();
 
 private:
 	std::string _id;

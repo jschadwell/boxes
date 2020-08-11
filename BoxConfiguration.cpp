@@ -13,8 +13,8 @@ bool BoxConfiguration::addChild(std::string id) {
 		return false;
 	}
 
-	auto pos = std::find(begin(_children), end(_children), id);
-	if (pos != end(_children)) {
+	auto pos = std::find(std::begin(_children), std::end(_children), id);
+	if (pos != std::end(_children)) {
 		return false;
 	}
 
@@ -22,6 +22,10 @@ bool BoxConfiguration::addChild(std::string id) {
 	return true;
 }
 
-const std::vector<std::string>& BoxConfiguration::getChildren() const {
-	return _children;
+BoxConfigurationIterator BoxConfiguration::begin() {
+	return std::begin(_children);
+}
+
+BoxConfigurationIterator BoxConfiguration::end() {
+	return std::end(_children);
 }

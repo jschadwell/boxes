@@ -1,5 +1,6 @@
 #include "BoxConfigurator.h"
 #include <iostream>
+#include <set>
 #include <utility>
 #include <algorithm>
 
@@ -95,19 +96,42 @@ bool BoxConfigurator::parseConfig(BoxConfigList& configList) {
 }
 
 bool BoxConfigurator::validateConfig(BoxConfigList& configList) {
+    // Get all of the box IDs. We'll use this to determine if there's
+    // more than one top box
+    std::set<std::string> boxIds;
+    for (auto&& item : configList) {
+        boxIds.insert(item->getId());
+    }
+
     // Make sure all children actually exist
     for (auto iter = begin(configList); iter != end(configList); iter++) {
         std::cout << "Key = " << (*iter)->getId() << std::endl;
         for (auto&& child : (*iter)->getChildren()) {
             if (std::count_if(begin(configList), end(configList), std::bind(isBoxEqual, std::placeholders::_1, child)) == 0) {
-                std::string msg = "Invalid child (" + child + ") found in box (" + (*iter)->getId() + ")";
-                errorMsg(msg.data());
+                errorMsg("Invalid child (" + child + ") found in box (" + (*iter)->getId() + ")");
                 return false;
             }
+
+            // Remove the child from the set of box IDs
+            boxIds.erase(child);
         }
     }
 
+    // We should only have one element left in the box IDs set
+    if (boxIds.size() > 1) {
+        std::string msg = "Multiple top-level boxes found:";
+        for (auto&& item : boxIds) {
+            msg += " " + item;
+        }
+        errorMsg(msg);
+        return false;
+    }
+
     return true;
+}
+
+void BoxConfigurator::errorMsg(const std::string& msg) {
+    errorMsg(msg.data());
 }
 
 void BoxConfigurator::errorMsg(const char* msg) {

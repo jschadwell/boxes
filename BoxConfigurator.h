@@ -4,7 +4,6 @@
 #include "BoxConfiguration.h"
 #include <boost/property_tree/xml_parser.hpp>
 #include <string>
-#include <map>
 #include <exception>
 
 namespace pt = boost::property_tree;
@@ -22,6 +21,7 @@ private:
     bool readConfigFile(std::string& xmlFile);
     bool parseConfig(BoxConfigList& configList);
     bool validateConfig(BoxConfigList& configList);
+    void errorMsg(const std::string& msg);
     void errorMsg(const char* msg);
 
     pt::ptree _tree;

@@ -1,14 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<nestconfig>
-  <box id="box1">
-    <child>box2</child>
-    <child>box5</child>
-  </box>
-  <box id="box2">
-    <child>box3</child>
-    <child>box4</child>
-  </box>
-  <box id="box3"/>
-  <box id="box4"/>
-  <box id="box5"/>
-</nestconfig>
+<?xml version="1.0" encoding="UTF-8" ?>
+<BoxConfig>
+  <Boxes>
+    <Box>box1</Box>
+    <Box>box2</Box>
+    <Box>box3</Box>
+    <Box>box4</Box>
+    <Box>box5</Box>
+  </Boxes>
+  <Packages>
+    <Package>
+      <Box>box1</Box>
+      <Children>
+        <Child>box2</Child>
+        <Child>box5</Child>
+      </Children>
+    </Package>
+    <Package>
+      <Box>box2</Box>
+      <Children>
+        <Child>box3</Child>
+        <Child>box4</Child>
+      </Children>
+    </Package>
+  </Packages>
+</BoxConfig>

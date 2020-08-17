@@ -1,6 +1,7 @@
 #include "BoxConfigurator.h"
 #include "BoxConfiguration.h"
 #include "BoxRepository.h"
+#include "BoxConfigWrapper.h"
 #include <iostream>
 #include <string>
 
@@ -14,6 +15,11 @@ int main(int argc, char* argv[]) {
 
     std::string configFile(argv[1]);
 
+    BoxConfigWrapper boxConfig(configFile);
+    boxConfig.init();
+
+
+#if 0
     // Get configuration from config file
     BoxConfigurator boxConfigurator;
     std::vector<BoxConfigurationPtr> boxConfig;
@@ -50,5 +56,6 @@ int main(int argc, char* argv[]) {
     top->resize();
     top->print();
 
+#endif
     return 0;
 }

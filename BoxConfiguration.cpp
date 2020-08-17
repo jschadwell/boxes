@@ -2,23 +2,23 @@
 #include <iostream>
 #include <algorithm>
 
-BoxConfiguration::BoxConfiguration(std::string id) : _id(id) {}
+BoxConfiguration::BoxConfiguration(std::string name) : _name(name) {}
 
-std::string& BoxConfiguration::getId() {
-	return _id;
+std::string& BoxConfiguration::getName() {
+	return _name;
 }
 
-bool BoxConfiguration::addChild(std::string id) {
-	if (_id.empty()) {
+bool BoxConfiguration::addChild(std::string name) {
+	if (name.empty()) {
 		return false;
 	}
 
-	auto pos = std::find(std::begin(_children), std::end(_children), id);
+	auto pos = std::find(std::begin(_children), std::end(_children), name);
 	if (pos != std::end(_children)) {
 		return false;
 	}
 
-	_children.push_back(id);
+	_children.push_back(name);
 	return true;
 }
 

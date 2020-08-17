@@ -8,16 +8,16 @@ using BoxConfigurationIterator = std::vector<std::string>::iterator;
 
 class BoxConfiguration {
 public:
-    BoxConfiguration(std::string id);
+    BoxConfiguration(std::string name);
     ~BoxConfiguration() = default;
 
-    std::string& getId();
-    bool addChild(std::string id);
+    std::string& getName();
+    bool addChild(std::string name);
     BoxConfigurationIterator begin();
     BoxConfigurationIterator end();
 
 private:
-	std::string _id;
+	std::string _name;
 	std::vector<std::string> _children;
 };
 

@@ -1,7 +1,6 @@
-#include "BoxConfigWrapper.h"
+#include "BoxConfigParser.h"
 #include <set>
 #include <iostream>
-#include <string>
 #include <cstring>
 
 const char BOX_CONFIG_ELEMENT[] = "BoxConfig";
@@ -13,10 +12,8 @@ const char CHILDREN_ELEMENT[] = "Children";
 const char CHILD_ELEMENT[] = "Child";
 const char EMPTY_STRING[] = "";
 
-BoxConfigWrapper::BoxConfigWrapper(std::string configFile) : _configFile(configFile) {}
-
-bool BoxConfigWrapper::init() {
-    if (!loadConfig()) {
+bool BoxConfigParser::parse(char* configFile) {
+    if (!loadConfig(configFile)) {
         return false;
     }
 
@@ -27,9 +24,9 @@ bool BoxConfigWrapper::init() {
     return true;
 }
 
-bool BoxConfigWrapper::loadConfig() {
-    std::cout << "Loading " << _configFile.data() << std::endl;
-    pugi::xml_parse_result result = _configDoc.load_file(_configFile.data());
+bool BoxConfigParser::loadConfig(char* configFile) {
+    std::cout << "Loading " << configFile << std::endl;
+    pugi::xml_parse_result result = _configDoc.load_file(configFile);
 
     if (!result) {
         std::cerr << "Error: " << result.description() << std::endl;
@@ -39,7 +36,7 @@ bool BoxConfigWrapper::loadConfig() {
     return true;
 }
 
-bool BoxConfigWrapper::validateConfig() {
+bool BoxConfigParser::validateConfig() {
     // Validate document node
     int numDocElements = 0;
     for (pugi::xml_node docElement : _configDoc) {

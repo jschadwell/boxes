@@ -1,7 +1,7 @@
 #include "BoxConfigurator.h"
 #include "BoxConfiguration.h"
 #include "BoxRepository.h"
-#include "BoxConfigWrapper.h"
+#include "BoxConfigParser.h"
 #include <iostream>
 #include <string>
 
@@ -15,8 +15,8 @@ int main(int argc, char* argv[]) {
 
     std::string configFile(argv[1]);
 
-    BoxConfigWrapper boxConfig(configFile);
-    boxConfig.init();
+    BoxConfigParser configParser;
+    configParser.parse(argv[1]);
 
 
 #if 0

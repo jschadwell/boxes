@@ -1,20 +1,19 @@
-#ifndef BOX_CONFIG_WRAPPER_H
-#define BOX_CONFIG_WRAPPER_H
+#ifndef BOX_CONFIG_PARSER_H
+#define BOX_CONFIG_PARSER_H
 
 #include "pugixml.hpp"
 #include <string>
 
-class BoxConfigWrapper {
+class BoxConfigParser {
 public:
-    BoxConfigWrapper(std::string configFile);
-    ~BoxConfigWrapper() = default;
+    BoxConfigParser() = default;
+    ~BoxConfigParser() = default;
 
-    bool init();
+    bool parse(char* configFile);
 
 private:
-    bool loadConfig();
+    bool loadConfig(char* configFile);
     bool validateConfig();
-    std::string _configFile;
     pugi::xml_document _configDoc;
 };
 

@@ -1,7 +1,7 @@
 #ifndef BOX_CONFIG_PARSER_H
 #define BOX_CONFIG_PARSER_H
 
-#include "pugixml.hpp"
+#include "toml.hpp"
 #include <string>
 
 class BoxConfigParser {
@@ -14,7 +14,7 @@ public:
 private:
     bool loadConfig(char* configFile);
     bool validateConfig();
-    pugi::xml_document _configDoc;
+    toml::table _config;
 };
 
 #endif // BOX_CONFIG_WRAPPER_H

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<nestconfig>
-  <box id="box1"/>
-</nestconfig>
+# example1.toml - Box configuration file
+
+[[boxes]]
+	box = "box1"

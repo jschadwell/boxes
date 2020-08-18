@@ -1,32 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<nestconfig>
-  <box id="box1">
-    <child>box2</child>
-    <child>box3</child>
-    <child>box4</child>
-  </box>
-  <box id="box2">
-    <child>box5</child>
-    <child>box6</child>
-    <child>box7</child>
-  </box>
-  <box id="box3">
-    <child>box8</child>
-    <child>box9</child>
-    <child>box10</child>
-  </box>
-  <box id="box4">
-    <child>box11</child>
-    <child>box12</child>
-    <child>box13</child>
-  </box>
-  <box id="box5"/>
-  <box id="box6"/>
-  <box id="box7"/>
-  <box id="box8"/>
-  <box id="box9"/>
-  <box id="box10"/>
-  <box id="box11"/>
-  <box id="box12"/>
-  <box id="box13"/>
-</nestconfig>
+# example4.toml - Box configuration file
+
+[[boxes]]
+  box = "box1"
+  children = [ "box2", "box3", "box4" ]
+[[boxes]]
+  box = "box2"
+  children = [ "box5", "box6", "box7" ]
+[[boxes]]
+  box = "box3"
+  children = [ "box8", "box9", "box10" ]
+[[boxes]]
+  box = "box4"
+  children = [ "box11", "box12", "box13" ]
+[[boxes]]
+  box = "box5"
+[[boxes]]
+  box = "box6"
+[[boxes]]
+  box = "box7"
+[[boxes]]
+  box = "box8"
+[[boxes]]
+  box = "box9"
+[[boxes]]
+  box = "box10"
+[[boxes]]
+  box = "box11"
+[[boxes]]
+  box = "box12"
+[[boxes]]
+  box = "box13"

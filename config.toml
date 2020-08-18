@@ -1,24 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<BoxConfig>
-  <Box>
-    <Name>box1</Name>
-    <Children>
-      <![CDATA[ box2,box5 ]]>
-    </Children>
-  </Box>
-  <Box>
-    <Name>box2</Name>
-    <Children>
-      <![CDATA[ box3,box4 ]]>
-    </Children>
-  </Box>
-  <Box>
-    <Name>box3</Name>
-  </Box>
-  <Box>
-    <Name>box4</Name>
-  </Box>
-  <Box>
-    <Name>box5</Name>
-  </Box>
-</BoxConfig>
+# config.toml - Box configuration file
+
+[[boxes]]
+  box = "box1"
+  children = [ "box2", "box5" ]
+[[boxes]]
+  box = "box2"
+  children = [ "box3", "box4" ]
+[[boxes]]
+  box = "box3"
+[[boxes]]
+  box = "box4"
+[[boxes]]
+  box = "box5"

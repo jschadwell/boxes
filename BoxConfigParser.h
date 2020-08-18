@@ -2,19 +2,21 @@
 #define BOX_CONFIG_PARSER_H
 
 #include "toml.hpp"
-#include <string>
+#include <map>
+#include <vector>
+
+using BoxConfiguration = std::map<std::string, std::vector<std::string> >;
 
 class BoxConfigParser {
 public:
     BoxConfigParser() = default;
     ~BoxConfigParser() = default;
 
-    bool parse(char* configFile);
+    BoxConfiguration* parse(char* configFile);
 
 private:
-    bool loadConfig(char* configFile);
-    bool validateConfig();
-    toml::table _config;
+    toml::table _tomlConfig;
+    BoxConfiguration _boxConfig;
 };
 
 #endif // BOX_CONFIG_WRAPPER_H

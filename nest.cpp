@@ -1,4 +1,3 @@
-#include "BoxConfiguration.h"
 #include "BoxRepository.h"
 #include "BoxConfigParser.h"
 #include <iostream>
@@ -12,10 +11,13 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    std::string configFile(argv[1]);
-
+    // Parse the box configuration file
     BoxConfigParser configParser;
-    configParser.parse(argv[1]);
+    BoxConfiguration* boxConfiguration;
+    boxConfiguration = configParser.parse(argv[1]);
+    if (!boxConfiguration) {
+        return 1;
+    }
 
 
 #if 0

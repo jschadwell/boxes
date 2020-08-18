@@ -1,4 +1,4 @@
 # example1.toml - Box configuration file
 
 [[boxes]]
-	box = "box1"
+    box = "box1"

@@ -1,14 +1,14 @@
 # config.toml - Box configuration file
 
 [[boxes]]
-  box = "box1"
-  children = [ "box2", "box5" ]
+    box = "box1"
+    children = [ "box2", "box5" ]
 [[boxes]]
-  box = "box2"
-  children = [ "box3", "box4" ]
+    box = "box2"
+    children = [ "box3", "box4" ]
 [[boxes]]
-  box = "box3"
+    box = "box3"
 [[boxes]]
-  box = "box4"
+    box = "box4"
 [[boxes]]
-  box = "box5"
+    box = "box5"

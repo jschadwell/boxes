@@ -1,16 +1,16 @@
 # example3.toml - Box configuration file
 
 [[boxes]]
-  box = "box1"
-  children = [ "box2" ]
+    box = "box1"
+    children = [ "box2" ]
 [[boxes]]
-  box = "box2"
-  children = [ "box3" ]
+    box = "box2"
+    children = [ "box3" ]
 [[boxes]]
-  box = "box3"
-  children = [ "box4" ]
+    box = "box3"
+    children = [ "box4" ]
 [[boxes]]
-  box = "box4"
-  children = [ "box5" ]
+    box = "box4"
+    children = [ "box5" ]
 [[boxes]]
-  box = "box5"
+    box = "box5"

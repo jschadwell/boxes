@@ -13,9 +13,7 @@ int main(int argc, char* argv[]) {
 
     // Parse the box configuration file
     BoxConfigParser configParser;
-    BoxConfiguration* boxConfiguration;
-    boxConfiguration = configParser.parse(argv[1]);
-    if (!boxConfiguration) {
+    if (!configParser.parse(argv[1])) {
         return 1;
     }
 

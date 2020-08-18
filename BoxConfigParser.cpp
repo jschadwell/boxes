@@ -8,18 +8,18 @@ const char BOXES_ARRAY[] = "boxes";
 const char BOX_ITEM[] = "box";
 const char CHILDREN_ITEM[] = "children";
 
-BoxConfiguration* BoxConfigParser::parse(char* configFile) {
+bool BoxConfigParser::parse(char* configFile) {
     try {
         _tomlConfig = toml::parse_file(configFile);
     } catch (const toml::parse_error& err) {
         std::cerr << "Error: " << err << "\n";
-        return nullptr;
+        return false;
     }
 
     auto boxes = _tomlConfig[BOXES_ARRAY];
     if (!boxes) {
         std::cerr << "Error: Unable to find (" << BOXES_ARRAY << ")" << "\n";
-        return nullptr;
+        return false;
     }
 
     toml::array* boxArray = boxes.as_array();
@@ -28,7 +28,7 @@ BoxConfiguration* BoxConfigParser::parse(char* configFile) {
         auto boxItem = boxTable->find(BOX_ITEM);
         if (boxItem == boxTable->end()) {
             std::cerr << "Error: Unable to find (" << BOX_ITEM << ") in " << BOXES_ARRAY << "\n";
-            return nullptr;
+            return false;
         }
 
         std::cout << "Box = " << *(boxItem->second.as_string()) << "\n";
@@ -45,5 +45,5 @@ BoxConfiguration* BoxConfigParser::parse(char* configFile) {
         }
     }
 
-    return &_boxConfig;
+    return true;
 }

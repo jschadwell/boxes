@@ -1,39 +1,31 @@
 #ifndef BOX_H
 #define BOX_H
 
+#include "AbstractBoxVisitor.h"
 #include <vector>
 #include <string>
 
 class Box;
-using BoxPtr = std::unique_ptr<Box>;
+using BoxUPtr = std::unique_ptr<Box>;
+using BoxIter = std::vector<BoxUPtr>::iterator;
 
 enum class Orientation { horizontal, vertical };
 
 class Box {
 public:
-    Box(std::string id);
+    Box(std::string name);
     ~Box() = default;
 
-    void addParent(Box* parent);
-    Box* getParent();
+    std::string& getName();
+    BoxIter begin();
+    BoxIter end();
     void addChild(Box* child);
-    std::vector<Box*>& getChildren();
-    void setWidth(int w);
-    int getWidth();
-    void setHeight(int h);
-    int getHeight();
-    void setOrientation(Orientation o);
-    Orientation getOrientation();
-    void resize();
-    void print();
+    bool hasChildren();
+    void accept(AbstractBoxVisitor& visitor);
 
 private:
-    std::string _id;
-    int _width;
-    int _height;
-    Orientation _orientation;
-    Box* _parent;
-    std::vector<Box*> _children;
+    std::string _name;
+    std::vector<BoxUPtr> _children;
 };
 
 #endif // BOX_H

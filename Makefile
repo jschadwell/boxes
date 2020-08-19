@@ -1,12 +1,12 @@
 CXX=g++
 RM=rm -f
 #CPPFLAGS=-g $(shell root-config --cflags)
-CXXFLAGS=-std=c++17
+CXXFLAGS=-g -std=c++17
 #LDFLAGS=-g $(shell root-config --ldflags)
-LDFLAGS=-lboost_filesystem -L/usr/local/boost_1_73_0/stage/lib -Wl,-rpath,/usr/local/boost_1_73_0/stage/lib
+LDFLAGS=-g -lboost_filesystem -L/usr/local/boost_1_73_0/stage/lib -Wl,-rpath,/usr/local/boost_1_73_0/stage/lib
 #LDLIBS=$(shell root-config --libs)
 
-SRCS=nest.cpp BoxConfigParser.cpp BoxConfiguration.cpp BoxRepository.cpp Box.cpp
+SRCS=nest.cpp BoxConfigParser.cpp BoxConfiguration.cpp Box.cpp DebugPrintVisitor.cpp
 OBJS=$(subst .cpp,.o,$(SRCS))
 
 all: nest
@@ -20,9 +20,9 @@ BoxConfigParser.o : BoxConfigParser.cpp BoxConfigParser.h
 
 BoxConfiguration.o : BoxConfiguration.cpp BoxConfiguration.h
 
-BoxRepository.o : BoxRepository.cpp BoxRepository.h Box.h
-
 Box.o : Box.cpp Box.h
+
+DebugPrintVisitor.o : DebugPrintVisitor.cpp DebugPrintVisitor.h AbstractBoxVisitor.h
 
 clean :
 	$(RM) $(OBJS)

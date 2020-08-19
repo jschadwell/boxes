@@ -1,4 +1,6 @@
-#include "BoxRepository.h"
+//#include "BoxRepository.h"
+#include "Box.h"
+#include "DebugPrintVisitor.h"
 #include "BoxConfigParser.h"
 #include <iostream>
 #include <string>
@@ -13,17 +15,14 @@ int main(int argc, char* argv[]) {
 
     // Parse the box configuration file
     BoxConfigParser configParser;
-    BoxConfigMap boxConfig;
-    if (!configParser.parse(argv[1], boxConfig)) {
+    BoxUPtr topBox = configParser.parse(argv[1]);
+    if (!topBox) {
         return 1;
     }
 
-    for (auto&& box : boxConfig) {
-        std::cout << "Box = " << box.first << "\n";
-        for (auto&& child : *(box.second)) {
-            std::cout << "    Child = " << child << "\n";
-        }
-    }
+    DebugPrintVisitor d;
+    topBox->accept(d);
+
 
 #if 0
     // Get configuration from config file

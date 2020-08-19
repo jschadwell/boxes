@@ -16,7 +16,7 @@ public:
 private:
 	bool parseBoxNames();
 	bool parseBoxChildren();
-	Box* getMainBox();
+	Box* getTopLevelBox();
     toml::table _tomlConfig;
     std::map<std::string, Box*> _boxMap;
 };

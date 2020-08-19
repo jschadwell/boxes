@@ -35,7 +35,7 @@ BoxUPtr BoxConfigParser::parse(char* configFile) {
         return nullptr;
     }
 
-    return BoxUPtr(getMainBox());
+    return BoxUPtr(getTopLevelBox());
 }
 
 bool BoxConfigParser::parseBoxNames() {
@@ -98,7 +98,7 @@ bool BoxConfigParser::parseBoxChildren() {
     return true;
 }
 
-Box* BoxConfigParser::getMainBox() {
+Box* BoxConfigParser::getTopLevelBox() {
     std::set<std::string> boxSet;
 
     // Make a set containing all of the box names. We'll use the set to find the main box
@@ -113,7 +113,7 @@ Box* BoxConfigParser::getMainBox() {
             continue;
         }
 
-        for (auto iter = box.second->begin(); iter <= box.second->end(); iter++) {
+        for (auto iter = box.second->begin(); iter != box.second->end(); iter++) {
             auto childName = (*iter)->getName();
             boxSet.erase(childName);
         }

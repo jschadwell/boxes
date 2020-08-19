@@ -13,10 +13,17 @@ int main(int argc, char* argv[]) {
 
     // Parse the box configuration file
     BoxConfigParser configParser;
-    if (!configParser.parse(argv[1])) {
+    BoxConfigMap boxConfig;
+    if (!configParser.parse(argv[1], boxConfig)) {
         return 1;
     }
 
+    for (auto&& box : boxConfig) {
+        std::cout << "Box = " << box.first << "\n";
+        for (auto&& child : *(box.second)) {
+            std::cout << "    Child = " << child << "\n";
+        }
+    }
 
 #if 0
     // Get configuration from config file

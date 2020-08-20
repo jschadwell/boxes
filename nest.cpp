@@ -23,6 +23,9 @@ int main(int argc, char* argv[]) {
     DebugPrintVisitor d;
     topBox->accept(d);
 
+    ReorganizeBoxVisitor reorganizer;
+    topBox->accept(reorganizer);
+
 
 #if 0
     // Get configuration from config file

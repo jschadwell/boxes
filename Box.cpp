@@ -2,13 +2,29 @@
 #include <iostream>
 #include <cmath>
 
-const int defaultWidth = 3;
-const int defaultHeight = 3;
+const unsigned int defaultWidth = 3;
+const unsigned int defaultHeight = 3;
 
-Box::Box(std::string name) : _name(name) {}
+Box::Box(std::string name) : _name(name), _width(defaultWidth), _height(defaultHeight) {}
 
 std::string& Box::getName() {
 	return _name;
+}
+
+void Box::setWidth(unsigned int width) {
+	_width = width;
+}
+
+unsigned int Box::getWidth() {
+	return _width;
+}
+
+void Box::setHeight(unsigned int height) {
+	_height = height;
+}
+
+unsigned int Box::getHeight() {
+	return _height;
 }
 
 BoxIter Box::begin() {

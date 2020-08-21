@@ -17,6 +17,10 @@ public:
     ~Box() = default;
 
     std::string& getName();
+    void setWidth(unsigned int width);
+    unsigned int getWidth();
+    void setHeight(unsigned int height);
+    unsigned int getHeight();
     BoxIter begin();
     BoxIter end();
     void addChild(Box* child);
@@ -26,6 +30,8 @@ public:
 private:
     std::string _name;
     std::vector<BoxUPtr> _children;
+    unsigned int _width;
+    unsigned int _height;
 };
 
 #endif // BOX_H

@@ -1,0 +1,42 @@
+# example2.toml - Box configuration file
+
+[[boxes]]
+    box = "box1"
+    orientation = "horizontal"
+    children = [ "box2", "box3", "box4", "box5" ]
+[[boxes]]
+    box = "box2"
+    orientation = "vertical"
+    children = [ "box6", "box7", "box8" ]
+[[boxes]]
+    box = "box3"
+    orientation = "vertical"
+[[boxes]]
+    box = "box4"
+    orientation = "vertical"
+[[boxes]]
+    box = "box5"
+    orientation = "horizontal"
+    children = [ "box11", "box12" ]
+[[boxes]]
+    box = "box6"
+    orientation = "vertical"
+    children = [ "box9", "box10" ]
+[[boxes]]
+    box = "box7"
+    orientation = "horizontal"
+[[boxes]]
+    box = "box8"
+    orientation = "horizontal"
+[[boxes]]
+    box = "box9"
+    orientation = "vertical"
+[[boxes]]
+    box = "box10"
+    orientation = "vertical"
+[[boxes]]
+    box = "box11"
+    orientation = "horizontal"
+[[boxes]]
+    box = "box12"
+    orientation = "horizontal"

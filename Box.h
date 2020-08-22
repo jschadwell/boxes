@@ -11,9 +11,12 @@ using BoxIter = std::vector<BoxUPtr>::iterator;
 
 class Box {
 public:
+    static const int MIN_WIDTH = 3;
+    static const int MIN_HEIGHT = 3;
+    
     enum class Orientation { horizontal, vertical };
 
-    Box(std::string name);
+    Box(std::string name, Orientation o);
     ~Box() = default;
 
     std::string& getName();

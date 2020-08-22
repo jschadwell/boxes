@@ -22,8 +22,6 @@ private:
         int width;
         int height;
     };
-    std::map<std::string, std::unique_ptr<BoxParm> > _horzBoxMap;
-    std::map<std::string, std::unique_ptr<BoxParm> > _vertBoxMap;
 };
 
 #endif

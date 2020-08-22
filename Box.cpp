@@ -2,7 +2,15 @@
 #include <iostream>
 #include <cmath>
 
-Box::Box(std::string name) : _name(name), _width(0), _height(0), _orientation(Orientation::horizontal) {}
+const int MIN_WIDTH = 3;
+const int MIN_HEIGHT = 3;
+
+Box::Box(std::string name, Box::Orientation o)
+	: _name(name),
+	  _width(Box::MIN_WIDTH),
+	  _height(Box::MIN_HEIGHT),
+	  _orientation(o) {
+}
 
 std::string& Box::getName() {
 	return _name;

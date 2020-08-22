@@ -10,7 +10,11 @@
 
 const char BOXES_ARRAY[] = "boxes";
 const char BOX_ITEM[] = "box";
+const char BOX_ORIENTATION_ITEM[] = "orientation";
 const char CHILDREN_ITEM[] = "children";
+
+const std::string H_ORIENTATION = std::string("horizontal");
+const std::string V_ORIENTATION = std::string("vertical");
 
 BoxUPtr BoxConfigParser::parse(char* configFile) {
     try {
@@ -56,8 +60,25 @@ bool BoxConfigParser::parseBoxNames() {
             return false;
         }
 
+        // Get the box's orientation
+        auto boxOrientationItem = boxTable->find(BOX_ORIENTATION_ITEM);
+        if (boxOrientationItem == boxTable->end()) {
+            std::cerr << "Error: Unable to find (" << BOX_ORIENTATION_ITEM << ") for " << boxName << "\n";
+            return false;
+        }
+        std::string boxOrientation = std::string(*(boxOrientationItem->second.as_string()));
+        Box::Orientation orientation;
+        if (boxOrientation == H_ORIENTATION) {
+            orientation = Box::Orientation::horizontal;
+        } else if (boxOrientation == V_ORIENTATION) {
+            orientation = Box::Orientation::vertical;
+        } else {
+            std::cerr << "Error: Invalid value for (" << BOX_ORIENTATION_ITEM << ") - " << boxOrientation << "\n";
+            return false;
+        }
+
         // Store the box
-        _boxMap.insert(std::pair<std::string, Box*>(boxName, new Box(boxName)));
+        _boxMap.insert(std::pair<std::string, Box*>(boxName, new Box(boxName, orientation)));
     }
 
     return true;

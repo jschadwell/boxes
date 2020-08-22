@@ -2,15 +2,20 @@
 
 [[boxes]]
     box = "box1"
+    orientation = "horizontal"
     children = [ "box2" ]
 [[boxes]]
     box = "box2"
+    orientation = "vertical"
     children = [ "box3" ]
 [[boxes]]
     box = "box3"
+    orientation = "horizontal"
     children = [ "box4" ]
 [[boxes]]
     box = "box4"
+    orientation = "vertical"
     children = [ "box5" ]
 [[boxes]]
     box = "box5"
+    orientation = "horizontal"

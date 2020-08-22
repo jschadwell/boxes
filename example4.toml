@@ -2,31 +2,44 @@
 
 [[boxes]]
     box = "box1"
+    orientation = "horizontal"
     children = [ "box2", "box3", "box4" ]
 [[boxes]]
     box = "box2"
+    orientation = "vertical"
     children = [ "box5", "box6", "box7" ]
 [[boxes]]
     box = "box3"
+    orientation = "vertical"
     children = [ "box8", "box9", "box10" ]
 [[boxes]]
     box = "box4"
+    orientation = "vertical"
     children = [ "box11", "box12", "box13" ]
 [[boxes]]
     box = "box5"
+    orientation = "horizontal"
 [[boxes]]
     box = "box6"
+    orientation = "horizontal"
 [[boxes]]
     box = "box7"
+    orientation = "horizontal"
 [[boxes]]
     box = "box8"
+    orientation = "horizontal"
 [[boxes]]
     box = "box9"
+    orientation = "horizontal"
 [[boxes]]
     box = "box10"
+    orientation = "horizontal"
 [[boxes]]
     box = "box11"
+    orientation = "horizontal"
 [[boxes]]
     box = "box12"
+    orientation = "horizontal"
 [[boxes]]
     box = "box13"
+    orientation = "horizontal"

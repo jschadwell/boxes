@@ -2,3 +2,4 @@
 
 [[boxes]]
     box = "box1"
+    orientation = "horizontal"

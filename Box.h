@@ -9,18 +9,20 @@ class Box;
 using BoxUPtr = std::unique_ptr<Box>;
 using BoxIter = std::vector<BoxUPtr>::iterator;
 
-enum class Orientation { horizontal, vertical };
-
 class Box {
 public:
+    enum class Orientation { horizontal, vertical };
+
     Box(std::string name);
     ~Box() = default;
 
     std::string& getName();
-    void setWidth(unsigned int width);
-    unsigned int getWidth();
-    void setHeight(unsigned int height);
-    unsigned int getHeight();
+    void setWidth(int w);
+    int getWidth();
+    void setHeight(int h);
+    int getHeight();
+    void setOrientation(Orientation o);
+    Orientation getOrientation();
     BoxIter begin();
     BoxIter end();
     void addChild(Box* child);
@@ -30,8 +32,9 @@ public:
 private:
     std::string _name;
     std::vector<BoxUPtr> _children;
-    unsigned int _width;
-    unsigned int _height;
+    int _width;
+    int _height;
+    Orientation _orientation;
 };
 
 #endif // BOX_H

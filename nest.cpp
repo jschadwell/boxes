@@ -20,11 +20,11 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    DebugPrintVisitor d;
-    topBox->accept(d);
-
     ReorganizeBoxVisitor reorganizer;
     topBox->accept(reorganizer);
+
+    DebugPrintVisitor d;
+    topBox->accept(d);
 
     return 0;
 }

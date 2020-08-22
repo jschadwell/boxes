@@ -14,15 +14,15 @@ all: nest
 nest: $(OBJS)
 	$(CXX) $(LDFLAGS) -o nest $(OBJS)
 
-nest.o : nest.cpp BoxConfigParser.h DebugPrintVisitor.h ReorganizeBoxVisitor.h
+nest.o : nest.cpp BoxConfigParser.h DebugPrintVisitor.h ReorganizeBoxVisitor.h Box.h
 
-BoxConfigParser.o : BoxConfigParser.cpp BoxConfigParser.h
+BoxConfigParser.o : BoxConfigParser.cpp BoxConfigParser.h Box.h
 
 Box.o : Box.cpp Box.h
 
-DebugPrintVisitor.o : DebugPrintVisitor.cpp DebugPrintVisitor.h AbstractBoxVisitor.h
+DebugPrintVisitor.o : DebugPrintVisitor.cpp DebugPrintVisitor.h AbstractBoxVisitor.h Box.h
 
-ReorganizeBoxVisitor.o : ReorganizeBoxVisitor.cpp ReorganizeBoxVisitor.h AbstractBoxVisitor.h
+ReorganizeBoxVisitor.o : ReorganizeBoxVisitor.cpp ReorganizeBoxVisitor.h AbstractBoxVisitor.h Box.h
 
 clean :
 	$(RM) $(OBJS)

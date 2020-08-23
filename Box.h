@@ -13,13 +13,15 @@ class Box {
 public:
     static const int MIN_WIDTH = 3;
     static const int MIN_HEIGHT = 3;
-    
+
     enum class Orientation { horizontal, vertical };
 
     Box(std::string name, Orientation o);
     ~Box() = default;
 
     std::string& getName();
+    void setParent(Box* box);
+    Box* getParent();
     void setWidth(int w);
     int getWidth();
     void setHeight(int h);
@@ -29,11 +31,14 @@ public:
     BoxIter begin();
     BoxIter end();
     void addChild(Box* child);
+    bool hasChild(std::string& name);
     bool hasChildren();
+    bool isSiblingOf(std::string& name);
     void accept(AbstractBoxVisitor& visitor);
 
 private:
     std::string _name;
+    Box* _parent;
     std::vector<BoxUPtr> _children;
     int _width;
     int _height;

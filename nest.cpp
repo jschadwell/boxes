@@ -1,6 +1,7 @@
 #include "Box.h"
 #include "DebugPrintVisitor.h"
 #include "ReorganizeBoxVisitor.h"
+#include "PrettyPrintVisitor.h"
 #include "BoxConfigParser.h"
 #include <iostream>
 #include <string>
@@ -25,6 +26,10 @@ int main(int argc, char* argv[]) {
 
     DebugPrintVisitor d;
     topBox->accept(d);
+
+    PrettyPrintVisitor printer;
+    topBox->accept(printer);
+    printer.printBoxes();
 
     return 0;
 }

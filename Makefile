@@ -6,15 +6,15 @@ CXXFLAGS=-g -std=c++17
 LDFLAGS=-g -lboost_filesystem -L/usr/local/boost_1_73_0/stage/lib -Wl,-rpath,/usr/local/boost_1_73_0/stage/lib
 #LDLIBS=$(shell root-config --libs)
 
-SRCS=nest.cpp BoxConfigParser.cpp Box.cpp DebugPrintVisitor.cpp ReorganizeBoxVisitor.cpp PrettyPrintVisitor.cpp
+SRCS=boxes.cpp BoxConfigParser.cpp Box.cpp DebugPrintVisitor.cpp ReorganizeBoxVisitor.cpp PrettyPrintVisitor.cpp
 OBJS=$(subst .cpp,.o,$(SRCS))
 
-all: nest
+all: boxes
 
-nest: $(OBJS)
+boxes: $(OBJS)
 	$(CXX) $(LDFLAGS) -o nest $(OBJS)
 
-nest.o : nest.cpp BoxConfigParser.h DebugPrintVisitor.h ReorganizeBoxVisitor.h PrettyPrintVisitor.h Box.h
+boxes.o : boxes.cpp BoxConfigParser.h DebugPrintVisitor.h ReorganizeBoxVisitor.h PrettyPrintVisitor.h Box.h
 
 BoxConfigParser.o : BoxConfigParser.cpp BoxConfigParser.h Box.h
 

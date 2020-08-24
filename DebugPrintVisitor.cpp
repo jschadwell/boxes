@@ -4,6 +4,8 @@
 
 void DebugPrintVisitor::visitBox(Box* box) {
     std::cout << "Box.name = " << box->getName() << "\n";
+    std::cout << "Box.x = " << box->getX() << "\n";
+    std::cout << "Box.y = " << box->getY() << "\n";
     std::cout << "Box.width = " << box->getWidth() << "\n";
     std::cout << "Box.height = " << box->getHeight() << "\n";
     std::cout << "Box.orientation = " << ((box->getOrientation() == Box::Orientation::horizontal) ? "horizontal" : "vertical") << "\n";

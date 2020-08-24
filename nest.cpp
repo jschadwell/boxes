@@ -24,8 +24,8 @@ int main(int argc, char* argv[]) {
     ReorganizeBoxVisitor reorganizer;
     topBox->accept(reorganizer);
 
-    DebugPrintVisitor d;
-    topBox->accept(d);
+    // DebugPrintVisitor d;
+    // topBox->accept(d);
 
     PrettyPrintVisitor printer;
     topBox->accept(printer);

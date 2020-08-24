@@ -8,6 +8,8 @@ const int MIN_HEIGHT = 3;
 Box::Box(std::string name, Box::Orientation o)
 	: _name(name),
 	  _parent(nullptr),
+	  _x(0),
+	  _y(0),
 	  _width(Box::MIN_WIDTH),
 	  _height(Box::MIN_HEIGHT),
 	  _orientation(o) {
@@ -23,6 +25,22 @@ void Box::setParent(Box* box) {
 
 Box* Box::getParent() {
 	return _parent;
+}
+
+void Box::setX(int x) {
+	_x = x;
+}
+
+int Box::getX() {
+	return _x;
+}
+
+void Box::setY(int y) {
+	_y = y;
+}
+
+int Box::getY() {
+	return _y;
 }
 
 void Box::setWidth(int w) {
@@ -57,8 +75,26 @@ BoxIter Box::end() {
 	return _children.end();
 }
 
+BoxReverseIter Box::rbegin() {
+	return _children.rbegin();
+}
+
+BoxReverseIter Box::rend() {
+	return _children.rend();
+}
+
 void Box::addChild(Box* child) {
 	_children.push_back(BoxUPtr(child));
+}
+
+Box* Box::getChild(std::string& name) {
+	for (auto iter = _children.begin(); iter != _children.end(); iter++) {
+		if (name == (*iter)->getName()) {
+			return iter->get();
+		}
+	}
+
+	return nullptr;
 }
 
 bool Box::hasChild(std::string& name) {

@@ -8,6 +8,7 @@
 class Box;
 using BoxUPtr = std::unique_ptr<Box>;
 using BoxIter = std::vector<BoxUPtr>::iterator;
+using BoxReverseIter = std::vector<BoxUPtr>::reverse_iterator;
 
 class Box {
 public:
@@ -22,6 +23,10 @@ public:
     std::string& getName();
     void setParent(Box* box);
     Box* getParent();
+    void setX(int x);
+    int getX();
+    void setY(int y);
+    int getY();
     void setWidth(int w);
     int getWidth();
     void setHeight(int h);
@@ -30,7 +35,10 @@ public:
     Orientation getOrientation();
     BoxIter begin();
     BoxIter end();
+    BoxReverseIter rbegin();
+    BoxReverseIter rend();
     void addChild(Box* child);
+    Box* getChild(std::string& name);
     bool hasChild(std::string& name);
     bool hasChildren();
     bool isSiblingOf(std::string& name);
@@ -40,6 +48,8 @@ private:
     std::string _name;
     Box* _parent;
     std::vector<BoxUPtr> _children;
+    int _x;
+    int _y;
     int _width;
     int _height;
     Orientation _orientation;

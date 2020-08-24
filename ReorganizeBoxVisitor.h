@@ -2,6 +2,7 @@
 #define REORGANIZE_BOX_VISITOR_H
 
 #include "AbstractBoxVisitor.h"
+#include "Box.h"
 #include <map>
 
 class ReorganizeBoxVisitor : public AbstractBoxVisitor {
@@ -14,14 +15,11 @@ public:
 private:
     void makeHorizontalStack(Box* box, int& width, int& height);
     void makeVerticalStack(Box* box, int& width, int& height);
+    void repositionChildrenHorizontally(Box* box);
+    void repositionChildrenVertically(Box* box);
+    void repositionChildrenInBox(Box* box);
 
-    struct BoxParm {
-        BoxParm(int w, int h) : width(w), height(h) {}
-        ~BoxParm() = default;
-
-        int width;
-        int height;
-    };
+    std::vector<Box*> _visited;
 };
 
 #endif

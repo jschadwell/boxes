@@ -113,6 +113,7 @@ bool BoxConfigParser::parseBoxChildren() {
 
             // Add child to the appropriate parent
             _boxMap.at(boxName)->addChild(_boxMap.at(childName));
+            _boxMap.at(childName)->setParent(_boxMap.at(boxName));
         }
     }
 

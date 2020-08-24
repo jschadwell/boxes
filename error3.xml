@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- ERROR: box has non-existent child -->
-<nestconfig>
-  <box id="box1"/>
-  	<child>box2</child>
-  </box>
-</nestconfig>

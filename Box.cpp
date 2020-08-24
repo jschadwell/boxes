@@ -1,5 +1,4 @@
 #include "Box.h"
-#include <iostream>
 #include <cmath>
 
 const int MIN_WIDTH = 3;

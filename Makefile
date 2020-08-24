@@ -12,7 +12,7 @@ OBJS=$(subst .cpp,.o,$(SRCS))
 all: boxes
 
 boxes: $(OBJS)
-	$(CXX) $(LDFLAGS) -o nest $(OBJS)
+	$(CXX) $(LDFLAGS) -o boxes $(OBJS)
 
 boxes.o : boxes.cpp BoxConfigParser.h DebugPrintVisitor.h ReorganizeBoxVisitor.h PrettyPrintVisitor.h Box.h
 

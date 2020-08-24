@@ -2,13 +2,18 @@
 
 [[boxes]]
     box = "box-A"
+    orientation = "horizontal"
     children = [ "box-AB", "box-BB" ]
 [[boxes]]
     box = "box-AB"
+    orientation = "vertical"
     children = [ "box-ABA", "box-ABB" ]
 [[boxes]]
     box = "box-ABA"
+    orientation = "horizontal"
 [[boxes]]
     box = "box-ABB"
+    orientation = "horizontal"
 [[boxes]]
     box = "box-BB"
+    orientation = "vertical"

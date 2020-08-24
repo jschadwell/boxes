@@ -81,6 +81,10 @@ void PrettyPrintVisitor::printBoxes() {
             }
         });
 
+    for (auto iter = _instructions.begin(); iter != _instructions.end(); iter++) {
+        std::cout << (*iter)->boxName << ", startX = " << (*iter)->startX << ", y = " << (*iter)->y << "\n";
+    }
+
 
     int curX = 0;
     int curY = 0;

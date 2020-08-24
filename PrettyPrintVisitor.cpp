@@ -13,16 +13,17 @@ void PrettyPrintVisitor::visitBox(Box* box) {
     int width = box->getWidth();
     int height = box->getHeight();
     std::string name = box->getName();
-    for (int y = 0; y < height; y++) {
-        if (y == 0 || y == height - 1) {
+    for (int y = box->getY(); y < box->getY() + height; y++) {
+        int x = box->getX();
+        if (y == box->getY() || y == box->getY() + (height - 1)) {
             // Print instructions for the top and bottom
-            _instructions.push_back(std::make_unique<PrintInstruction>(PrintInstruction( { name, box->getX(), 0, y, CORNER } )));
-            _instructions.push_back(std::make_unique<PrintInstruction>(PrintInstruction( { name, box->getX() + 1, width - 2, y, HORIZONTAL_EDGE } )));
-            _instructions.push_back(std::make_unique<PrintInstruction>(PrintInstruction( { name, width - 1, width - 1, y, CORNER } )));
+            _instructions.push_back(std::make_unique<PrintInstruction>(PrintInstruction( { name, x, x, y, CORNER } )));
+            _instructions.push_back(std::make_unique<PrintInstruction>(PrintInstruction( { name, x + 1, x + (width - 2), y, HORIZONTAL_EDGE } )));
+            _instructions.push_back(std::make_unique<PrintInstruction>(PrintInstruction( { name, x + (width - 1), x + (width - 1), y, CORNER } )));
         } else {
             // Print instructions for the sides
-            _instructions.push_back(std::make_unique<PrintInstruction>(PrintInstruction( { name, box->getX(), 0, y, VERTICAL_EDGE } )));
-            _instructions.push_back(std::make_unique<PrintInstruction>(PrintInstruction( { name, width - 1, width - 1, y, VERTICAL_EDGE } )));
+            _instructions.push_back(std::make_unique<PrintInstruction>(PrintInstruction( { name, x, x, y, VERTICAL_EDGE } )));
+            _instructions.push_back(std::make_unique<PrintInstruction>(PrintInstruction( { name, x + (width - 1), x + (width - 1), y, VERTICAL_EDGE } )));
         }
     }
 }

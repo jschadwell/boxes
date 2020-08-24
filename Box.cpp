@@ -76,6 +76,12 @@ bool Box::hasChildren() {
 }
 
 bool Box::isSiblingOf(std::string& name) {
+	// Make sure we're not checking if the box is its own sibling
+	if (name == _name) {
+		return false;
+	}
+
+	// Make sure the box has a parent
 	if (_parent == nullptr) {
 		return false;
 	}
